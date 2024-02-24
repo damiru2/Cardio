@@ -18,7 +18,19 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.scss$/,
+        use: ['vue-style-loader', 'css-loader', 'sass-loader'],
+      },
     ],
+  },
+  devServer: {
+    port: 9000,
+    compress: true,
+    hot: true,
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
   },
   plugins: [new VueLoaderPlugin()],
 };
