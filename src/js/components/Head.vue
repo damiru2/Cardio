@@ -21,7 +21,7 @@
         <img src="/img/lead.png" alt="Workout" />
         <div class="lead__info">
           <div class="lead__info__time">
-            <span>38:14</span>
+            <span>{{ showTime }}</span>
             ВРЕМЯ
           </div>
           <div class="lead__info__cl">
@@ -34,7 +34,35 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      showTime: '39:00',
+      timerCount: 38 * 60,
+    };
+  },
+  watch: {
+    timerCount: {
+      handler() {
+        setTimeout(() => {
+          if (this.timerCount <= 0) return;
+
+          this.timerCount--;
+          const minutes = Math.ceil(this.timerCount / 60);
+          const seconds = this.timerCount - minutes * 60 + 60;
+          let textSeconds = 0;
+          if (seconds == 60) textSeconds == '00';
+          else if (seconds < 10 && seconds > 0) textSeconds = '00' + seconds;
+          else textSeconds = seconds;
+
+          this.showTime =
+            (textSeconds == '00' ? minutes + 1 : minutes) + ':' + textSeconds;
+        }, 1000);
+      },
+      immediate: true,
+    },
+  },
+};
 </script>
 <style lang="scss">
 .head {
@@ -43,12 +71,23 @@ export default {};
   height: 800px;
 }
 
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .promotion {
   background: #191919;
   border-radius: 200px;
   padding: 10px 5px;
   color: #d1d1d1;
   width: 330px;
+
+  animation: pulse infinite ease-in-out 1.5s alternate;
 
   span {
     background: #25ab75;

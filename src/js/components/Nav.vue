@@ -1,7 +1,15 @@
 <template>
   <nav class="nav">
     <span class="nav__logo">WORKOUT</span>
-    <ul class="nav__links">
+    <ul class="nav__links" v-if="screenWidth > 1024">
+      <li><a href="">УПРАЖНЕНИЯ</a></li>
+      <li><a href="">ТРЕНИРОВКИ</a></li>
+      <li><a href="">ЦЕНЫ</a></li>
+      <li><a href="">ПРО НАС</a></li>
+    </ul>
+    <i v-else :class="menuIcon" @click="showMenu()"></i>
+
+    <ul class="nav__links--mobile" v-if="screenWidth < 1024 && mobileMenu">
       <li><a href="">УПРАЖНЕНИЯ</a></li>
       <li><a href="">ТРЕНИРОВКИ</a></li>
       <li><a href="">ЦЕНЫ</a></li>
@@ -11,7 +19,31 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      screenWidth: screen.width,
+      mobileMenu: false,
+      menuIcon: 'fa-solid fa-bars',
+    };
+  },
+  mounted() {
+    this.onScreenResize();
+  },
+  methods: {
+    onScreenResize() {
+      window.addEventListener('resize', () => {
+        this.screenWidth = screen.width;
+      });
+    },
+    showMenu() {
+      this.mobileMenu = !this.mobileMenu;
+      this.menuIcon = this.menuIcon.includes('bars')
+        ? 'fa-solid fa-xmark'
+        : 'fa-solid fa-bars';
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -20,6 +52,7 @@ export default {};
   justify-content: space-between;
   align-items: center;
   margin-top: 50px;
+  flex-wrap: wrap;
 
   .nav__logo {
     font-size: 1.8em;
@@ -37,6 +70,16 @@ export default {};
         margin-right: 27px;
       }
     }
+  }
+}
+
+.nav__links--mobile {
+  list-style: none;
+  text-align: center;
+  width: 100%;
+
+  li {
+    margin-top: 25px;
   }
 }
 </style>

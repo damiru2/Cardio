@@ -21,6 +21,10 @@ $additionColor: #25ab75;
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+::selection {
+  background: #25ab75;
+}
+
 * {
   margin: 0;
   padding: 0;
