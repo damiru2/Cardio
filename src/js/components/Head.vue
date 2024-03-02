@@ -67,8 +67,11 @@ export default {
 <style lang="scss">
 .head {
   margin-top: 70px;
-  overflow: hidden;
-  height: 800px;
+
+  @media (max-width: 1024px) {
+    overflow: hidden;
+    height: 800px;
+  }
 }
 
 @keyframes pulse {
@@ -85,9 +88,17 @@ export default {
   border-radius: 200px;
   padding: 10px 5px;
   color: #d1d1d1;
-  width: 330px;
 
   animation: pulse infinite ease-in-out 1.5s alternate;
+
+  @media (min-width: 450px) {
+    width: 330px;
+  }
+
+  @media (max-width: 450px) {
+    width: 270px;
+    font-size: 0.85em;
+  }
 
   span {
     background: #25ab75;
@@ -105,14 +116,35 @@ export default {
   position: relative;
 
   h1 {
-    font-size: 12em;
-    line-height: 170px;
+    @media (min-width: 1500px) {
+      font-size: 12em;
+      line-height: 170px;
+    }
+    @media (max-width: 1500px) and (min-width: 1300px) {
+      font-size: 11em;
+      line-height: 160px;
+    }
+    @media (max-width: 1300px) and (min-width: 650px) {
+      font-size: 8.5em;
+      line-height: 150px;
+    }
+    @media (max-width: 650px) and (min-width: 450px) {
+      font-size: 5.5em;
+      line-height: 110px;
+    }
+    @media (max-width: 450px) {
+      font-size: 4em;
+      line-height: 70px;
+    }
   }
 
   p {
     color: #868686;
-    width: 600px;
     margin: 20px 0;
+
+    @media (min-width: 650px) {
+      width: 600px;
+    }
   }
 
   .lead__buttons > button {
@@ -128,9 +160,12 @@ export default {
     margin-top: 30px;
     transition: transform 500ms ease;
 
+    &:first-of-type {
+      margin-right: 35px;
+    }
+
     &:last-of-type {
       background: #191919;
-      margin-left: 35px;
     }
 
     &:hover {
@@ -139,10 +174,27 @@ export default {
   }
 
   > div:last-of-type {
+    @media (max-width: 1074px) {
+      display: none;
+    }
+
     img {
       position: relative;
-      bottom: 255px;
-      right: 270px;
+
+      @media (min-width: 1500px) {
+        bottom: 255px;
+        right: 270px;
+      }
+      @media (max-width: 1500px) and (min-width: 1300px) {
+        transform: scale(0.7);
+        bottom: 315px;
+        right: 300px;
+      }
+      @media (max-width: 1300px) {
+        transform: scale(0.7);
+        bottom: 326px;
+        right: 350px;
+      }
     }
 
     .lead__info {
