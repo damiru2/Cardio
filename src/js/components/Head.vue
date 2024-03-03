@@ -67,8 +67,10 @@ export default {
 <style lang="scss">
 .head {
   margin-top: 70px;
+  // border: 1px solid white;
+  height: 800px;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1074px) {
     overflow: hidden;
     height: 800px;
   }
